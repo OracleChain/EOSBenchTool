@@ -31,7 +31,7 @@ EOSBenchTool client prepares a batch of transactions, then uses the pushTransact
 
 > [QT](https://www.qt.io/download) >= 5.8 just need to import and build the project with [QT](https://www.qt.io/download))
 
-**依赖库/DEPENDENCYS:**
+**DEPENDENCYS:**
 
 > our ECDSA is based on micro-ecc
 
@@ -54,14 +54,13 @@ EOSBenchTool client prepares a batch of transactions, then uses the pushTransact
 ### Settings
 ![](https://github.com/OracleChain/EOSBenchTool/blob/master/screenshots/setting.PNG)
 >You should first set contract, create token, issue token, then you can use this tool to testing nodeos' performance.
+* cleos -u http://127.0.0.1:8888/  set contract eosio.token ./eosio.token -p eosio.token
+* cleos -u http://127.0.0.1:8888/   push action eosio.token create '{"issuer": "eosio", "maximum_supply": "100000000.0000 EOS", "can_freeze": 0, "can_recall": 0, "can_whitelist": 0}' -p eosio.token
+* cleos -u http://127.0.0.1:8888/    push action eosio.token issue '[ "eosio", "100000000.0000 EOS", "m" ]' -p eosio
 
->Thread number recommended to be your computer's kernel number minus 1.
+>Thread number recommended to be your computer's  cpu number.
 
->Contract account and Token name are which you created and set contract.
-
->Total tokens is NOT token numbers you just created, this recommended to be 10000, because it just send 0.00001 token per time during testing.
-
->Super account is the account hold enough tokens.
+>"Transaction Pool Size" * 0.0001(each transaction send 0.00001 token)="Total tokens"
 
 >Transaction pool size is the bottle size which all threads saving packed transactions. When the packed transactions size reach to pool size, this means it's ready to sending packed transactions.
 
