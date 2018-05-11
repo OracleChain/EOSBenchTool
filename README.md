@@ -17,9 +17,9 @@
 <h2 id="1">Overview</h2>
 
 
-The EOSBenchTool program is a benchmark testing tool build on EOSIO ecology. It provides a stress testing method based on account creation, transfer and other functions, to test the TPS of EOS node. 
+The EOSBenchTool is a EOS pressure testing tool. 
 
-EOSBenchTool client prepares a batch of transactions, then uses the pushTransactions to sends transactions to EOS node to save the client's packaging, signature time, use the limited client to maximize the pressure test on the server as far as possible!
+EOSBenchTool client prepares a batch of transactions to save the client's packaging, signature time, then use push_transactions to sends transactions to EOS node, use the limited clients to maximize the pressure test on the server!
 
 
 ------------------------------
