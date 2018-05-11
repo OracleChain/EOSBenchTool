@@ -1,8 +1,8 @@
 # 关于/About
 
-**EOSBenchTool**是一个PC端跨平台,EOS压力测试工具，由[OracleChain团队](https://oraclechain.io)研发。
+**EOSBenchTool**是一个PC端跨平台，EOS压力测试工具，由[OracleChain团队](https://oraclechain.io)研发。
 
-**EOSBenchTool** is a cross-platform EOS PC benchmark testing tool, which is developed by [OracleChain.io](https://oraclechain.io).
+**EOSBenchTool** is a PC cross-platform, EOS pressure testing tool, which is developed by [OracleChain.io](https://oraclechain.io).
 
 ------------------------------
 
