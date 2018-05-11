@@ -19,7 +19,7 @@
 
 EOSBenchTool是一个建立在EOSIO生态上的节点压力测试工具。它提供了基础的账户创建，转账等功能，用于测试节点的TPS(每秒处理交易)。测试人员可以使用EOSBenchTool连接EOSIO网络，对EOS的节点进行压力测试。
 
-The EOSDevHelper program is a benchmark tool build on EOSIO ecology. It provides create account, transfer functions, and etc, to test the TPS(transactions per second) of EOS node. Tester can use this tool connect the EOSIO testnet, and test the EOS node's performance.
+The EOSBenchTool program is a benchmark tool build on EOSIO ecology. It provides create account, transfer functions, and etc, to test the TPS(transactions per second) of EOS node. Tester can use this tool connect the EOSIO testnet, and test the EOS node's performance.
 
 
 ------------------------------
