@@ -19,7 +19,11 @@
 
 EOSBenchTool是一个建立在EOSIO生态上的节点压力测试工具。它提供了基础的账户创建，转账等功能，用于测试节点的TPS(每秒处理交易)。测试人员可以使用EOSBenchTool连接EOSIO网络，对EOS的节点进行压力测试。
 
+其测试原理是利用多个线程完成交易的打包（`get_info`, `abi_json_to_bin`, `get_required_keys`），将打包好的交易放入交易包池中，等到池中积攒够一定多的交易时，一次性按一定数量使用`push_transactions`将交易包批量发送，对nodeos发送大量交易，测试其处理性能。
+
 The EOSBenchTool program is a benchmark testing tool build on EOSIO ecology. It provides create account, transfer functions, and etc, to test the TPS(transactions per second) of EOS node. Testers can use this tool connect the EOSIO testnet, and test the EOS node's performance.
+
+The principle of this tool is: We use multiple threads finish transaction packing(`get_info`, `abi_json_to_bin`, `get_required_keys`), and save packed transactions into pool, once the size of pool get enough, we send numbers packed transactions by `push_transactions` interface, sending numbers transactions, hence we testing EOS nodeos' peformance.
 
 
 ------------------------------
@@ -57,6 +61,19 @@ The EOSBenchTool program is a benchmark testing tool build on EOSIO ecology. It 
 
 ### 设置/Settings
 ![](https://github.com/OracleChain/EOSBenchTool/blob/master/screenshots/setting.PNG)
+>Thread number prefer your computer's kernel number minus 1.
+
+>You should first set contract, create token, issue token, then you can use this tool.
+
+>Contract account and Token name are which you created and set contract.
+
+>Total tokens is NOT token numbers you just created, this prefer to be 10000, because it just send 0.00001 token per time during testing.
+
+>Super account is the account hold enough tokens.
+
+>Transaction pool size is the bottle size which all threads are fill in. When the packed transactions filled size to pool size, this means it's ready to sending packed transactions back to accounts just created.
+
+>Transaction batch size is the array number of `push_transactions`.
 
 ### 测试/Test
 ![](https://github.com/OracleChain/EOSBenchTool/blob/master/screenshots/testing.png)
