@@ -53,21 +53,21 @@ EOSBenchTool client prepares a batch of transactions, then uses the pushTransact
 
 ### Prepation
 >You should first set contract, create token, issue token, then you can use this tool to testing nodeos' performance.
-* `cleos -u http://127.0.0.1:8888/  set contract eosio.token ./eosio.token -p eosio.token`
-* `cleos -u http://127.0.0.1:8888/   push action eosio.token create '{"issuer": "eosio", "maximum_supply": "100000000.0000 EOS", "can_freeze": 0, "can_recall": 0, "can_whitelist": 0}' -p eosio.token`
-* `cleos -u http://127.0.0.1:8888/    push action eosio.token issue '[ "eosio", "100000000.0000 EOS", "m" ]' -p eosio`
+`cleos -u http://127.0.0.1:8888/  set contract eosio.token ./eosio.token -p eosio.token`
+`cleos -u http://127.0.0.1:8888/   push action eosio.token create '{"issuer": "eosio", "maximum_supply": "100000000.0000 EOS", "can_freeze": 0, "can_recall": 0, "can_whitelist": 0}' -p eosio.token`
+`cleos -u http://127.0.0.1:8888/    push action eosio.token issue '[ "eosio", "100000000.0000 EOS", "m" ]' -p eosio`
 
 ### Settings
 ![](https://github.com/OracleChain/EOSBenchTool/blob/master/screenshots/setting.PNG)
-* Host address
+* Host address <br>
  EOS node ip
-* Port
+* Port <br>
  EOS node port
-* Thread number
+* Thread number <br>
  recommended to be your computer's  cpu number.
-* Transaction Pool Size, Total tokens
+* Transaction Pool Size, Total tokens <br>
  "Transaction Pool Size" * 0.0001(each transaction send 0.00001 token)="Total tokens"
-* Transaction batch size
+* Transaction batch size <br>
  transactions number in one `push_transactions` interface.
 
 ### Test
