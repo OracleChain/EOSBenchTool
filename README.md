@@ -52,9 +52,9 @@ EOSBenchTool client prepares a batch of transactions, then uses the pushTransact
 <h2 id="3">Functions</h2>
 
 ### Prepation
->You should first set contract, create token, issue token, then you can use this tool to testing nodeos' performance.
-`cleos -u http://127.0.0.1:8888/  set contract eosio.token ./eosio.token -p eosio.token`
-`cleos -u http://127.0.0.1:8888/   push action eosio.token create '{"issuer": "eosio", "maximum_supply": "100000000.0000 EOS", "can_freeze": 0, "can_recall": 0, "can_whitelist": 0}' -p eosio.token`
+>You should first set contract, create token, issue token, then you can use this tool to testing nodeos' performance.<br>
+`cleos -u http://127.0.0.1:8888/  set contract eosio.token ./eosio.token -p eosio.token`<br>
+`cleos -u http://127.0.0.1:8888/   push action eosio.token create '{"issuer": "eosio", "maximum_supply": "100000000.0000 EOS", "can_freeze": 0, "can_recall": 0, "can_whitelist": 0}' -p eosio.token`<br>
 `cleos -u http://127.0.0.1:8888/    push action eosio.token issue '[ "eosio", "100000000.0000 EOS", "m" ]' -p eosio`
 
 ### Settings
