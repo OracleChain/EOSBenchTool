@@ -23,7 +23,7 @@ EOSBenchTool是一个建立在EOSIO生态上的节点压力测试工具。它提
 
 The EOSBenchTool program is a benchmark testing tool build on EOSIO ecology. It provides create account, transfer functions, and etc, to test the TPS of EOS node. Testers can use this tool connect the EOSIO testnet, and test the EOS node's performance.
 
-The principle of this tool is: We use multiple threads finish transaction packing(`get_info`, `abi_json_to_bin`, `get_required_keys`), and save packed transactions into pool, once the size of pool get enough, we send numbers packed transactions by `push_transactions` interface, sending numbers transactions, hence we testing EOS nodeos' peformance.
+The principle of this tool is: we use multiple threads finish transaction packing(`get_info`, `abi_json_to_bin`, `get_required_keys`), and save packed transactions into pool, once the size of pool get enough, we send numbers packed transactions by `push_transactions` interface, sending numbers transactions, hence we testing EOS nodeos' peformance.
 
 
 ------------------------------
@@ -82,6 +82,8 @@ The principle of this tool is: We use multiple threads finish transaction packin
 > Max tps means the max tps during testing duration.
 
 >Average tps is just average tps during duration.
+
+>ATTENTION: You should always reopen EOSBenchTool to restart a new testing.
 
 ------------------------------
 <h2 id="4">有关欧链/About OracleChain</h2>
