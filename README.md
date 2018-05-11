@@ -66,13 +66,13 @@ EOSBenchTool client prepares a batch of transactions, then uses the pushTransact
 * Thread number <br>
  recommended to be your computer's  cpu number.
 * Transaction Pool Size, Total tokens <br>
- "Transaction Pool Size" * 0.0001(each transaction send 0.00001 token)="Total tokens"
+ "Transaction Pool Size" * 0.0001(each transaction send 0.0001 token)="Total tokens"
 * Transaction batch size <br>
  transactions number in one `push_transactions` interface.
 
 ### Test
 ![](https://github.com/OracleChain/EOSBenchTool/blob/master/screenshots/testing.png)
->first swittch `Settings` page to complete settings, second switch page to `Benchmark Testing` page, and then click `Prepare` button and wait for preparation process completion, then click `Start` button to send prepared transactions, wait until the testing result shows on the right of tool interface.
+>first switch `Settings` page to complete settings, second switch to `Benchmark Testing` page, and then click `Prepare` button and wait for preparation process completion, then click `Start` button to send prepared transactions, wait until the testing result shows on the right of tool interface.
 
 > Max tps means<br>
   the max tps(transactions per second) during testing duration.
