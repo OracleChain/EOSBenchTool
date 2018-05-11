@@ -77,6 +77,11 @@ The principle of this tool is: We use multiple threads finish transaction packin
 
 ### 测试/Test
 ![](https://github.com/OracleChain/EOSBenchTool/blob/master/screenshots/testing.png)
+>After setting done, you switch page to testing, click `Prepare` button and wait to finish, and then click `Start` button to transfer packed transactions, when everything done, you should see testing result on the right of tool.
+
+> Max tps means the max tps during testing duration.
+
+>Average tps is just average tps during duration.
 
 ------------------------------
 <h2 id="4">有关欧链/About OracleChain</h2>
