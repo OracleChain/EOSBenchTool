@@ -17,11 +17,11 @@
 
 <h2 id="1">简介/Overview</h2>
 
-EOSBenchTool是一个建立在EOSIO生态上的节点压力测试工具。它提供了基础的账户创建，转账等功能，用于测试节点的TPS。测试人员可以使用EOSBenchTool连接EOSIO网络，对EOS的节点进行压力测试。
+EOSBenchTool是一个建立在EOSIO生态上的节点压力测试工具。它提供了基于账户创建，转账等功能的压力测试方式。测试人员可以使用EOSBenchTool连接EOSIO网络，对EOS的节点进行压力测试。
 
 其测试原理是利用多个线程完成交易的打包（`get_info`, `abi_json_to_bin`, `get_required_keys`），将打包好的交易放入交易包池中，等到池中积攒够一定多的交易时，一次性按一定数量使用`push_transactions`将交易包批量发送，对nodeos发送大量交易，测试其处理性能。
 
-The EOSBenchTool program is a benchmark testing tool build on EOSIO ecology. It provides create account, transfer functions, and etc, to test the TPS of EOS node. Testers can use this tool connect the EOSIO testnet, and test the EOS node's performance.
+The EOSBenchTool program is a benchmark testing tool build on EOSIO ecology. It provides a stress testing method based on account creation, transfer and other functions, to test the TPS of EOS node. Testers can use this tool connect the EOSIO testnet, and test the EOS node's performance.
 
 The principle of this tool is: we use multiple threads finish transaction packing(`get_info`, `abi_json_to_bin`, `get_required_keys`), and save packed transactions into pool, once the size of pool get enough, we send numbers packed transactions by `push_transactions` interface, sending numbers transactions, hence we testing EOS nodeos' peformance.
 
