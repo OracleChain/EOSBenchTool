@@ -12,6 +12,7 @@
 # Qt-es
 object_script.*.Release
 object_script.*.Debug
+build-*
 *_plugin_import.cpp
 /.qmake.cache
 /.qmake.stash
