@@ -8,10 +8,10 @@
 
 # 目录/Menu
 * [简介/Overview](#1)
-* [开发和使用环境/ENVIRONMENT](#2)
+* [开发和使用环境/Environment](#2)
 * [功能介绍/Functions](#3)
 * [有关欧链/About OracleChain](#4)
-* [版权/LICENSE](#4)
+* [版权/Liecnse](#4)
 
 ------------------------------
 
