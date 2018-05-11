@@ -72,13 +72,13 @@ EOSBenchTool client prepares a batch of transactions, then uses the pushTransact
 
 ### Test
 ![](https://github.com/OracleChain/EOSBenchTool/blob/master/screenshots/testing.png)
->After setting done, you switch page to testing, click `Prepare` button and wait to finish, and then click `Start` button to transfer packed transactions, when everything done, you should see testing result on the right of tool.
+>first swittch `Settings` page to complete settings, second switch page to `Benchmark Testing` page, and then click `Prepare` button and wait for preparation process completion, then click `Start` button to send prepared transactions, wait until the testing result shows on the right of tool interface.
 
-> Max tps means the max tps during testing duration.
+> Max tps means<br>
+  the max tps(transactions per second) during testing duration.
 
->Average tps is just average tps during duration.
-
->ATTENTION: You should always reopen EOSBenchTool to restart a new testing.
+>ATTENTION<br>
+ You should always reopen EOSBenchTool to restart a new testing.
 
 ------------------------------
 <h2 id="4">About OracleChain</h2>
