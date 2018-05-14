@@ -36,6 +36,9 @@ EOSBenchTool client prepares a batch of transactions to save the client's packag
 |Version|MD5|
 |------|---|
 |[WINDOWS_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSBenchTool/releases/download/1.0/EOSBenchTool_Windows_Release.zip)|eec548fc2d760e65bed9c0c508dd6e92|
+|[UBUNTU_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSBenchTool/releases/download/1.0/EOSBenchTool_Ubuntu_Release.zip)|b9eb6dc0c8e99eb6b9d3f8e7cf605111|
+
+>For Ubuntu: Tested on Ubuntu 16.04 x64, you should `chmod +x start.sh`, then use `./start.sh` .
 
 **DEPENDENCYS:**
 
