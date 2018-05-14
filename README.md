@@ -59,6 +59,7 @@ EOSBenchTool client prepares a batch of transactions to save the client's packag
 
 ### Prepation
 >First set contract, create token, issue token, and then use this tool to testing nodeos' performance.<br>
+You can refer to [Tutorial eosio token Contract](https://github.com/EOSIO/eos/wiki/Tutorial-eosio-token-Contract) or using following command:
 `cleos -u http://127.0.0.1:8888/  set contract eosio.token ./eosio.token -p eosio.token`<br>
 `cleos -u http://127.0.0.1:8888/   push action eosio.token create '{"issuer": "eosio", "maximum_supply": "100000000.0000 EOS", "can_freeze": 0, "can_recall": 0, "can_whitelist": 0}' -p eosio.token`<br>
 `cleos -u http://127.0.0.1:8888/    push action eosio.token issue '[ "eosio", "100000000.0000 EOS", "m" ]' -p eosio`
