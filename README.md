@@ -82,7 +82,7 @@ You can refer to [Tutorial eosio token Contract](https://github.com/EOSIO/eos/wi
 >First switch `Settings` page to complete settings.
 >Second switch to `Benchmark Testing` page, click `Prepare` button and wait for preparation processing complete, then click `Start` button to send prepared transactions, wait until the testing result shows.
 
-> Max tps means<br>
+> Max tps<br>
   The max tps(transactions per second) during testing duration.
 
 >ATTENTION<br>
