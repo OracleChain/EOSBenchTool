@@ -34,7 +34,7 @@ EOSBenchTool client prepares a batch of transactions to save the client's packag
 &emsp;2. download our git repository.
 >`git clone --recurse-submodules https://github.com/OracleChain/EOSBenchTool.git`
 
-&emsp;3. open QT and choose "Open Project", select the "src/EOSBenchTool.pro" and open
+&emsp;3. open Qt Creator and choose "Open Project", select the "src/EOSBenchTool.pro" and open
 
 &emsp;4. select Build from QT menu and Run it.
 
