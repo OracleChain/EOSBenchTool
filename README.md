@@ -79,10 +79,11 @@ You can refer to [Tutorial eosio token Contract](https://github.com/EOSIO/eos/wi
 
 ### Test
 ![](https://github.com/OracleChain/EOSBenchTool/blob/master/screenshots/testing.png)
->first switch `Settings` page to complete settings, second switch to `Benchmark Testing` page, and then click `Prepare` button and wait for preparation process completion, then click `Start` button to send prepared transactions, wait until the testing result shows on the right of tool interface.
+>First switch `Settings` page to complete settings.
+>Second switch to `Benchmark Testing` page, click `Prepare` button and wait for preparation processing complete, then click `Start` button to send prepared transactions, wait until the testing result shows.
 
 > Max tps means<br>
-  the max tps(transactions per second) during testing duration.
+  The max tps(transactions per second) during testing duration.
 
 >ATTENTION<br>
  You should always reopen EOSBenchTool to restart a new testing.
