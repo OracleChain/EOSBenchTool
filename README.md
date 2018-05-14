@@ -71,11 +71,11 @@ You can refer to [Tutorial eosio token Contract](https://github.com/EOSIO/eos/wi
 * Port <br>
  EOS node port
 * Thread number <br>
- recommended to be your computer's  cpu number.
+ Recommended to be your computer's CPU number.
 * Transaction Pool Size, Total tokens <br>
  "Transaction Pool Size" * 0.0001(each transaction send 0.0001 token)="Total tokens"
 * Transaction batch size <br>
- transactions number in one `push_transactions` interface.
+ Transactions number in one `push_transactions`.
 
 ### Test
 ![](https://github.com/OracleChain/EOSBenchTool/blob/master/screenshots/testing.png)
