@@ -306,7 +306,7 @@ void MainWindow::packedTrxTransferFinished()
     enableResultCounter(true);
 
     ui->pushButtonRun->setEnabled(false);
-    ui->pushButtonRun->setText("Finished");
+    ui->pushButtonRun->setText("Counting Result");
     commonOutput("Transfer done, wait for counting result.");
     commonOutput("------------------------------------------");
 }
@@ -317,5 +317,6 @@ void MainWindow::resultCountFinished()
        resultCounter->deleteLater();
    }
 
+   ui->pushButtonRun->setText("Finished");
    commonOutput("*****Test done!*****");
 }
