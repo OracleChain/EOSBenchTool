@@ -27,11 +27,16 @@ EOSBenchTool client prepares a batch of transactions to save the client's packag
 
 **ENVIRONMENT：**
 
-> MACOS、WINDOWS、UBUNTU
+&emsp;MACOS、WINDOWS、UBUNTU
 
-> [QT](https://www.qt.io/download) >= 5.8 just need to import and build the project with [QT](https://www.qt.io/download))
+&emsp;1. install [QT](https://www.qt.io/download) >= 5.8
 
+&emsp;2. download our git repository.
 >`git clone --recurse-submodules https://github.com/OracleChain/EOSBenchTool.git`
+
+&emsp;3. open QT and choose "Open Project", select the "src/EOSDevHelper.pro" and open
+
+&emsp;4. select Build from QT menu and Run it.
 
 **DOWNLOAD & TRY**
 
