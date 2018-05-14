@@ -31,6 +31,8 @@ EOSBenchTool client prepares a batch of transactions to save the client's packag
 
 > [QT](https://www.qt.io/download) >= 5.8 just need to import and build the project with [QT](https://www.qt.io/download))
 
+>`git clone --recurse-submodules https://github.com/OracleChain/EOSBenchTool.git`
+
 **DOWNLOAD & TRY**
 
 |Version|MD5|
