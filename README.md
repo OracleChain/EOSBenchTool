@@ -35,7 +35,7 @@ EOSBenchTool client prepares a batch of transactions to save the client's packag
 
 |Version|MD5|
 |------|---|
-|[WINDOWS_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSBenchTool/raw/master/EOSBenchTool_Windows_Release.zip)|eec548fc2d760e65bed9c0c508dd6e92|
+|[WINDOWS_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSBenchTool/releases/download/1.0/EOSBenchTool_Windows_Release.zip)|eec548fc2d760e65bed9c0c508dd6e92|
 
 **DEPENDENCYS:**
 
