@@ -5,7 +5,7 @@
 #include <QVector>
 #include <functional>
 
-#include "chain/signedtransaction.h"
+#include "codebase/chain/signedtransaction.h"
 
 class HttpClient;
 class eos_key;

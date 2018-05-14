@@ -1,14 +1,14 @@
 #include "createaccount.h"
-#include "utility/httpclient.h"
-#include "mainwindow.h"
-#include "chain/eosnewaccount.h"
-#include "chain/eosbytewriter.h"
-#include "chain/action.h"
-#include "chain/chainmanager.h"
-#include "ec/typechainid.h"
-#include "chain/packedtransaction.h"
 #include "accountmanager.h"
-#include "utility/utils.h"
+
+#include "codebase/chain/eosnewaccount.h"
+#include "codebase/chain/eosbytewriter.h"
+#include "codebase/chain/action.h"
+#include "codebase/chain/chainmanager.h"
+#include "codebase/ec/typechainid.h"
+#include "codebase/chain/packedtransaction.h"
+#include "codebase/utility/httpclient.h"
+#include "codebase/utility/utils.h"
 
 #include <QMessageBox>
 #include <QJsonDocument>

@@ -1,8 +1,9 @@
 #include "pushmanager.h"
-#include "chain/packedtransaction.h"
-#include "chain/chainmanager.h"
-#include "utility/httpclient.h"
 #include "account/accountmanager.h"
+
+#include "codebase/chain/packedtransaction.h"
+#include "codebase/chain/chainmanager.h"
+#include "codebase/utility/httpclient.h"
 
 #include <QJsonDocument>
 #include <QJsonObject>

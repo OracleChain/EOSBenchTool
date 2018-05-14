@@ -1,6 +1,7 @@
 #include "resultcounter.h"
-#include "utility/httpclient.h"
 #include "datamanager.h"
+
+#include "codebase/utility/httpclient.h"
 
 #include <QJsonDocument>
 #include <QJsonObject>

@@ -25,31 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    utility/httpclient.cpp \
-    utility/utils.cpp \
     account/createaccount.cpp \
-    chain/action.cpp \
-    chain/chainmanager.cpp \
-    chain/eosbytewriter.cpp \
-    chain/eosnewaccount.cpp \
-    chain/packedtransaction.cpp \
-    chain/signedtransaction.cpp \
-    chain/transaction.cpp \
-    chain/transactionheader.cpp \
-    chain/typeaccountpermissionweight.cpp \
-    chain/typeauthority.cpp \
-    chain/typekeypermissionweight.cpp \
-    chain/typename.cpp \
-    chain/typepermissionlevel.cpp \
-    Crypto/aes.c \
-    Crypto/base58.c \
-    Crypto/rmd160.c \
-    Crypto/sha2.c \
-    Crypto/sha3.c \
-    Crypto/uECC.c \
-    ec/eos_key_encode.cpp \
-    ec/sha512.cpp \
-    ec/typechainid.cpp \
     account/accountmanager.cpp \
     push/pushmanager.cpp \
     work/datamanager.cpp \
@@ -57,39 +33,35 @@ SOURCES += main.cpp\
     misc/aboutframe.cpp \
     work/transactionpool.cpp \
     work/resultcounter.cpp \
-    work/packer.cpp
+    work/packer.cpp \
+    codebase/chain/action.cpp \
+    codebase/chain/chainmanager.cpp \
+    codebase/chain/eosbytewriter.cpp \
+    codebase/chain/eosnewaccount.cpp \
+    codebase/chain/packedtransaction.cpp \
+    codebase/chain/signedtransaction.cpp \
+    codebase/chain/transaction.cpp \
+    codebase/chain/transactionheader.cpp \
+    codebase/chain/typeaccountpermissionweight.cpp \
+    codebase/chain/typeauthority.cpp \
+    codebase/chain/typekeypermissionweight.cpp \
+    codebase/chain/typename.cpp \
+    codebase/chain/typepermissionlevel.cpp \
+    codebase/Crypto/aes.c \
+    codebase/Crypto/base58.c \
+    codebase/Crypto/rmd160.c \
+    codebase/Crypto/sha2.c \
+    codebase/Crypto/sha3.c \
+    codebase/Crypto/uECC.c \
+    codebase/ec/eos_key_encode.cpp \
+    codebase/ec/sha512.cpp \
+    codebase/ec/typechainid.cpp \
+    codebase/utility/httpclient.cpp \
+    codebase/utility/utils.cpp
 
 HEADERS  += mainwindow.h \
     setting/config.h \
-    utility/httpclient.h \
-    utility/utils.h \
     account/createaccount.h \
-    chain/action.h \
-    chain/chainbase.h \
-    chain/chainmanager.h \
-    chain/eosbytewriter.h \
-    chain/eosnewaccount.h \
-    chain/packedtransaction.h \
-    chain/signedtransaction.h \
-    chain/transaction.h \
-    chain/transactionheader.h \
-    chain/typeaccountpermissionweight.h \
-    chain/typeauthority.h \
-    chain/typekeypermissionweight.h \
-    chain/typename.h \
-    chain/typepermissionlevel.h \
-    Crypto/aes.h \
-    Crypto/aes.hpp \
-    Crypto/libbase58.h \
-    Crypto/macros.h \
-    Crypto/options.h \
-    Crypto/rmd160.h \
-    Crypto/sha2.h \
-    Crypto/sha3.h \
-    Crypto/uECC.h \
-    ec/eos_key_encode.h \
-    ec/sha512.h \
-    ec/typechainid.h \
     account/accountmanager.h \
     push/pushmanager.h \
     work/datamanager.h \
@@ -97,7 +69,35 @@ HEADERS  += mainwindow.h \
     misc/aboutframe.h \
     work/transactionpool.h \
     work/resultcounter.h \
-    work/packer.h
+    work/packer.h \
+    codebase/chain/action.h \
+    codebase/chain/chainbase.h \
+    codebase/chain/chainmanager.h \
+    codebase/chain/eosbytewriter.h \
+    codebase/chain/eosnewaccount.h \
+    codebase/chain/packedtransaction.h \
+    codebase/chain/signedtransaction.h \
+    codebase/chain/transaction.h \
+    codebase/chain/transactionheader.h \
+    codebase/chain/typeaccountpermissionweight.h \
+    codebase/chain/typeauthority.h \
+    codebase/chain/typekeypermissionweight.h \
+    codebase/chain/typename.h \
+    codebase/chain/typepermissionlevel.h \
+    codebase/Crypto/aes.h \
+    codebase/Crypto/aes.hpp \
+    codebase/Crypto/libbase58.h \
+    codebase/Crypto/macros.h \
+    codebase/Crypto/options.h \
+    codebase/Crypto/rmd160.h \
+    codebase/Crypto/sha2.h \
+    codebase/Crypto/sha3.h \
+    codebase/Crypto/uECC.h \
+    codebase/ec/eos_key_encode.h \
+    codebase/ec/sha512.h \
+    codebase/ec/typechainid.h \
+    codebase/utility/httpclient.h \
+    codebase/utility/utils.h
 
 FORMS    += mainwindow.ui \
     misc/aboutframe.ui

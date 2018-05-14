@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QString>
 
-#include "chain/signedtransaction.h"
+#include "codebase/chain/signedtransaction.h"
 
 class HttpClient;
 

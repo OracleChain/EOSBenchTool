@@ -1,5 +1,5 @@
 #include "accountmanager.h"
-#include "chain/chainbase.h"
+#include "codebase/chain/chainbase.h"
 #include "setting/config.h"
 
 extern QString super_account;

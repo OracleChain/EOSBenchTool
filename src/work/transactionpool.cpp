@@ -1,6 +1,7 @@
 #include "transactionpool.h"
-#include "utility/httpclient.h"
 #include "datamanager.h"
+
+#include "codebase/utility/httpclient.h"
 
 #include <QMutexLocker>
 #include <QDateTime>

@@ -4,7 +4,8 @@
 #include <QMap>
 #include <QVector>
 #include <QString>
-#include "ec/eos_key_encode.h"
+
+#include "codebase/ec/eos_key_encode.h"
 
 class AccountManager
 {
