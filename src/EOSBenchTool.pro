@@ -57,7 +57,10 @@ SOURCES += main.cpp\
     codebase/ec/sha512.cpp \
     codebase/ec/typechainid.cpp \
     codebase/utility/httpclient.cpp \
-    codebase/utility/utils.cpp
+    codebase/utility/utils.cpp \
+    codebase/chain/transactionextension.cpp \
+    codebase/chain/typewaitweight.cpp \
+    codebase/ec/sha256.cpp
 
 HEADERS  += mainwindow.h \
     setting/config.h \
@@ -97,7 +100,10 @@ HEADERS  += mainwindow.h \
     codebase/ec/sha512.h \
     codebase/ec/typechainid.h \
     codebase/utility/httpclient.h \
-    codebase/utility/utils.h
+    codebase/utility/utils.h \
+    codebase/chain/transactionextension.h \
+    codebase/chain/typewaitweight.h \
+    codebase/ec/sha256.h
 
 FORMS    += mainwindow.ui \
     misc/aboutframe.ui
