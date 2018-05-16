@@ -41,7 +41,7 @@ private slots:
     void on_pushButtonRun_clicked();
     void on_pushButtonOK_clicked();
 
-    void updateHandledTransationUI(const QSet<QString>& trxs, qint64 duration);
+    void updateHandledTransationUI(qint64 trxs, qint64 duration);
     void updateMaxTPS(double tps);
 
     void packedTrxReady();
@@ -55,6 +55,8 @@ private:
     QVector<Packer*> packers;
     ResultCounter *resultCounter;
     TransactionPool *trxpool;
+
+    qint64 total_trxs;
 
     const static int MAX_ROW = 10000;
 };

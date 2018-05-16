@@ -13,11 +13,11 @@
 ResultCounter::ResultCounter()
 {
     needStop = false;
+    curTrxs = 0;
 }
 
 ResultCounter::~ResultCounter()
 {
-    handledTransactions.clear();
 }
 
 void ResultCounter::run()
@@ -28,8 +28,6 @@ void ResultCounter::run()
     qint64 lastTime = 0;
     double maxtps = 0.0;
 
-    QSet<QString> totalTrxs;
-
     for (int block_num = beginBlock; block_num <= endBlock && !needStop; ++block_num) {
         get_block(block_num);
 
@@ -37,13 +35,12 @@ void ResultCounter::run()
             beginTime = curTimestamp;
         }
 
-        totalTrxs = totalTrxs.unite(handledTransactions);
         qint64 delta = curTimestamp - beginTime;
-        emit handledTrxsArrived(totalTrxs, delta);
+        emit handledTrxsArrived(curTrxs, delta);
 
         int interval = curTimestamp - lastTime;
         if (interval) {
-            maxtps = std::max(handledTransactions.size() * 1.0 / interval * 1000, maxtps);
+            maxtps = std::max(curTrxs * 1.0 / interval * 1000, maxtps);
             emit maxTPS(maxtps);
         }
 
@@ -58,6 +55,8 @@ void ResultCounter::stop()
 
 void ResultCounter::get_block_returned(const QByteArray &data)
 {
+    curTrxs = 0;
+
     QJsonObject obj = QJsonDocument::fromJson(data).object();
     do
     {
@@ -72,52 +71,8 @@ void ResultCounter::get_block_returned(const QByteArray &data)
 
         curTimestamp = QDateTime::fromString(ts, Qt::ISODateWithMs).toMSecsSinceEpoch();
 
-        QJsonArray regions = obj.value("regions").toArray();
-        if (regions.isEmpty()) {
-            break;
-        }
-
-        for (int i = 0; i < regions.size(); ++i) {
-            QJsonObject regObj = regions.at(i).toObject();
-            if (regObj.isEmpty()) {
-                continue;
-            }
-
-            QJsonArray cyclesArray = regObj.value("cycles_summary").toArray();
-            if (cyclesArray.isEmpty()) {
-                continue;
-            }
-
-            for (int j = 0; j < cyclesArray.size(); ++j) {
-                QJsonArray cArray = cyclesArray.at(j).toArray();
-                if (cArray.isEmpty()) {
-                    continue;
-                }
-
-                for (int k = 0; k < cArray.size(); ++k) {
-                    QJsonObject cObj = cArray.at(k).toObject();
-                    if (cObj.isEmpty()) {
-                        continue;
-                    }
-
-                    QJsonArray txnArray = cObj.value("transactions").toArray();
-                    if (txnArray.isEmpty()) {
-                        continue;
-                    }
-
-                    if (txnArray.isEmpty()) {
-                        continue;
-                    }
-
-                    // so many loops... -_-!
-                    handledTransactions.clear();
-                    for (int m = 0; m < txnArray.size(); ++m) {
-                        QString id = txnArray.at(m).toObject().value("id").toString();
-                        handledTransactions.insert(id);
-                    }
-                }
-            }
-        }
+        QJsonArray txnArray = obj.value("transactions").toArray();
+        curTrxs = txnArray.size();
     } while(false);
 
     emit oneRoundFinished();

@@ -202,7 +202,7 @@ border-radius: 4px;</string>
 color: rgb(255, 255, 255);</string>
                 </property>
                 <property name="text">
-                 <string>Handled transactions(first 10000 if any):</string>
+                 <string>Handled transactions per block:</string>
                 </property>
                </widget>
               </item>

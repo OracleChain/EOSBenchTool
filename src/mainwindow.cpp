@@ -23,7 +23,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     resultCounter(nullptr),
     trxpool(nullptr),
-    about(nullptr)
+    about(nullptr),
+    total_trxs(0)
 {
     ui->setupUi(this);
     ui->tabWidget->setTabPosition(QTabWidget::West);
@@ -110,22 +111,17 @@ void MainWindow::commonOutput(const QString &msg)
     ui->textEditCommonOut->append(msg);
 }
 
-void MainWindow::updateHandledTransationUI(const QSet<QString> &trxs, qint64 duration)
+void MainWindow::updateHandledTransationUI(qint64 trxs, qint64 duration)
 {
-    ui->textEditHandledTrxs->clear();
+    total_trxs += trxs;
 
-    int sz = trxs.size() > MAX_ROW ? MAX_ROW : trxs.size();
-    int index = 0;
-    for (auto itr = trxs.constBegin(); itr != trxs.constEnd() && index < sz; ++itr, ++index) {
-        ui->textEditHandledTrxs->append(*itr);
-    }
-
-    ui->lineEditHandleTrxsCount->setText(QString::number(trxs.size()));
+    ui->textEditHandledTrxs->append(QString::number(trxs));
+    ui->lineEditHandleTrxsCount->setText(QString::number(total_trxs));
     ui->lineEditTotalTime->setText(QString::number(duration));
 
     double tps = 0.0;
     if (duration) {
-        tps = (trxs.size() * 1.0) / duration * 1000;
+        tps = (total_trxs * 1.0) / duration * 1000;
     }
     ui->lineEditAverageTPS->setText(QString::number(tps, 'f', 1));
 }

@@ -13,12 +13,11 @@ public:
     ~ResultCounter();
 
     virtual void run();
-
     void stop();
 
 signals:
     void oneRoundFinished();
-    void handledTrxsArrived(const QSet<QString>&, qint64);
+    void handledTrxsArrived(qint64, qint64);
     void duration(qint64 );
     void maxTPS(double );
 
@@ -31,7 +30,7 @@ private:
 private:
     bool needStop;
 
-    QSet<QString> handledTransactions;
+    qint64 curTrxs;
     qint64 curTimestamp;
 };
 
