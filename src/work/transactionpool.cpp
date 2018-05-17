@@ -40,7 +40,7 @@ void TransactionPool::run()
             array.append(val);
         }
 
-        httpc.push_transactions(QString::fromStdString(QJsonDocument(array).toJson().toStdString()));
+        httpc.push_transactions(QJsonDocument(array).toJson());
         loop.exec();
     }
 

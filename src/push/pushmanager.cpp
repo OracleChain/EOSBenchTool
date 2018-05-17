@@ -56,15 +56,13 @@ bool PushManager::make_push(const QString &code, const QString &action, const QB
     QJsonObject argObj = QJsonDocument::fromJson(input).object();
     obj.insert("args", QJsonValue(argObj));
 
-    QByteArray param = QJsonDocument(obj).toJson();
-
     result = false;
 
     QEventLoop loop;
     connect(this, &PushManager::oneRoundFinished, &loop, &QEventLoop::quit);
 
     if (httpc) {
-        httpc->abi_json_to_bin(QString::fromStdString(param.toStdString()));
+        httpc->abi_json_to_bin(QJsonDocument(obj).toJson());
         connect(httpc, &HttpClient::responseData, this, &PushManager::abi_json_to_bin_returned);
     }
 
@@ -166,7 +164,7 @@ void PushManager::get_info_returned(const QByteArray &data)
     }
 
     if (httpc) {
-        httpc->get_required_keys(QString::fromStdString(param.toStdString()));
+        httpc->get_required_keys(param);
         connect(httpc, &HttpClient::responseData, this, &PushManager::get_required_keys_returned);
     }
 }
@@ -192,7 +190,7 @@ void PushManager::get_required_keys_returned(const QByteArray &data)
     }
 
     if (httpc) {
-        httpc->push_transaction(QString::fromStdString(param.toStdString()));
+        httpc->push_transaction(param);
         connect(httpc, &HttpClient::responseData, this, &PushManager::push_transaction_returned);
     }
 }

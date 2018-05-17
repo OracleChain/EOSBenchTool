@@ -64,8 +64,6 @@ int CreateAccount::create(int threadNum, const create_account_callback& func)
         func(newAccountName, res);
     }
 
-    // in fact that if most account created, only one or two failed didn't affect the test.
-    // we should think twice here.
     return AccountManager::instance().count() - 1;  // super account.
 }
 
@@ -83,7 +81,7 @@ void CreateAccount::get_info_returned(const QByteArray &data)
     }
 
     if (httpc) {
-        httpc->get_required_keys(std::move(QString::fromStdString(param.toStdString())));
+        httpc->get_required_keys(param);
         connect(httpc, &HttpClient::responseData, this, &CreateAccount::get_required_keys_returned);
     }
 }
@@ -102,7 +100,7 @@ void CreateAccount::get_required_keys_returned(const QByteArray &data)
     }
 
     if (httpc) {
-        httpc->push_transaction(std::move(QString::fromStdString(param.toStdString())));
+        httpc->push_transaction(param);
         connect(httpc, &HttpClient::responseData, this, &CreateAccount::push_transaction_returned);
     }
 }
