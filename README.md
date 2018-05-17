@@ -43,7 +43,7 @@ EOSBenchTool client prepares a batch of transactions to save the client's packag
 |Version|MD5|
 |------|---|
 |[WINDOWS_v2.0(compliant with dawn-v4.0.0)](https://github.com/OracleChain/EOSBenchTool/releases/download/dawn-4.0/EOSBenchTool_Windows_Release_Dawn4.zip)|8895f8f0192cc54a3d6f10a794db1543|
-|[Ubuntu_v2.0(compliant with dawn-v4.0.0)](https://github.com/OracleChain/EOSBenchTool/releases/download/dawn-4.0/EOSBenchTool_Ubuntu_Release_Dawn4.zip)|f4704058a726422bb53cbb0207c7b268|
+|[UBUNTU_v2.0(compliant with dawn-v4.0.0)](https://github.com/OracleChain/EOSBenchTool/releases/download/dawn-4.0/EOSBenchTool_Ubuntu_Release_Dawn4.zip)|f4704058a726422bb53cbb0207c7b268|
 |[WINDOWS_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSBenchTool/releases/download/1.0/EOSBenchTool_Windows_Release.zip)|eec548fc2d760e65bed9c0c508dd6e92|
 |[UBUNTU_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSBenchTool/releases/download/1.0/EOSBenchTool_Ubuntu_Release.zip)|b9eb6dc0c8e99eb6b9d3f8e7cf605111|
 
