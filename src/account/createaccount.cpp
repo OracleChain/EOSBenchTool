@@ -185,7 +185,12 @@ QByteArray CreateAccount::packPushTransactionParam()
         return QByteArray();
     }
 
-    signedTxn.sign(pri, TypeChainId());
+    QJsonObject info = QJsonDocument::fromJson(getInfoData).object();
+    if (info.isEmpty()) {
+        return QByteArray();
+    }
+
+    signedTxn.sign(pri, TypeChainId::fromHex(info.value("chain_id").toString().toStdString()));
     PackedTransaction packedTxn(signedTxn, "none");
 
     QJsonObject obj = packedTxn.toJson().toObject();

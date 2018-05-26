@@ -119,7 +119,12 @@ QByteArray PushManager::packPushTransactionParam()
         return QByteArray();
     }
 
-    signedTrx.sign(pri, TypeChainId());
+    QJsonObject info = QJsonDocument::fromJson(getInfoData).object();
+    if (info.isEmpty()) {
+        return QByteArray();
+    }
+
+    signedTrx.sign(pri, TypeChainId::fromHex(info.value("chain_id").toString().toStdString()));
     PackedTransaction packedTrx(signedTrx, "none");
 
     QJsonObject obj = packedTrx.toJson().toObject();
