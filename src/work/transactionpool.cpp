@@ -40,7 +40,7 @@ void TransactionPool::run()
             array.append(val);
         }
 
-        httpc.push_transactions(QJsonDocument(array).toJson());
+        httpc.request(FunctionID::push_transactions, QJsonDocument(array).toJson());
         loop.exec();
     }
 
@@ -78,7 +78,7 @@ int TransactionPool::get_block_info()
 
         loop.quit();
     });
-    httpc.get_info();
+    httpc.request(FunctionID::get_info);
     loop.exec();
 
     return num;

@@ -87,7 +87,7 @@ void ResultCounter::get_block(int block_num)
     connect(this, &ResultCounter::oneRoundFinished, &loop, &QEventLoop::quit);
 
     HttpClient httpc;
-    httpc.get_block(QJsonDocument(obj).toJson());
+    httpc.request(FunctionID::get_block, QJsonDocument(obj).toJson());
     connect(&httpc, &HttpClient::responseData, this, &ResultCounter::get_block_returned);
 
     loop.exec();

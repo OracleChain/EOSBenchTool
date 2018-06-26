@@ -62,7 +62,7 @@ bool PushManager::make_push(const QString &code, const QString &action, const QB
     connect(this, &PushManager::oneRoundFinished, &loop, &QEventLoop::quit);
 
     if (httpc) {
-        httpc->abi_json_to_bin(QJsonDocument(obj).toJson());
+        httpc->request(FunctionID::abi_json_to_bin, QJsonDocument(obj).toJson());
         connect(httpc, &HttpClient::responseData, this, &PushManager::abi_json_to_bin_returned);
     }
 
@@ -145,7 +145,7 @@ void PushManager::abi_json_to_bin_returned(const QByteArray &data)
     abiJsonToBinData = data;
 
     if (httpc) {
-        httpc->get_info();
+        httpc->request(FunctionID::get_info);
         connect(httpc, &HttpClient::responseData, this, &PushManager::get_info_returned);
     }
 }
@@ -169,7 +169,7 @@ void PushManager::get_info_returned(const QByteArray &data)
     }
 
     if (httpc) {
-        httpc->get_required_keys(param);
+        httpc->request(FunctionID::get_required_keys, param);
         connect(httpc, &HttpClient::responseData, this, &PushManager::get_required_keys_returned);
     }
 }
@@ -195,7 +195,7 @@ void PushManager::get_required_keys_returned(const QByteArray &data)
     }
 
     if (httpc) {
-        httpc->push_transaction(param);
+        httpc->request(FunctionID::push_transaction, param);
         connect(httpc, &HttpClient::responseData, this, &PushManager::push_transaction_returned);
     }
 }
