@@ -74,7 +74,7 @@ void CreateAccount::get_info_returned(const QByteArray &data)
     getInfoData.clear();
     getInfoData = data;
 
-    QByteArray param = packGetRequiredKeysParam();
+    auto param = packGetRequiredKeysParam();
     if (param.isNull()) {
         emit oneRoundFinished();
         return;
@@ -93,7 +93,7 @@ void CreateAccount::get_required_keys_returned(const QByteArray &data)
     getRequiredKeysData.clear();
     getRequiredKeysData = data;
 
-    QByteArray param = packPushTransactionParam();
+    auto param = packPushTransactionParam();
     if (param.isNull()) {
         emit oneRoundFinished();
         return;
@@ -111,7 +111,7 @@ void CreateAccount::push_transaction_returned(const QByteArray &data)
 
     do
     {
-        QJsonObject obj = QJsonDocument::fromJson(data).object();
+        auto obj = QJsonDocument::fromJson(data).object();
         if (obj.isEmpty()) {
             break;
         }
@@ -139,19 +139,17 @@ QByteArray CreateAccount::packGetRequiredKeysParam()
                              keys.at(0).get_eos_public_key(), keys.at(1).get_eos_public_key(),
                              EOS_SYSTEM_ACCOUNT);
 
-    std::vector<unsigned char> hexData = newAccount.dataAsHex();
-
+    auto hexData = newAccount.dataAsHex();
     signedTxn = ChainManager::createTransaction(EOS_SYSTEM_ACCOUNT, newAccount.getActionName(), std::string(hexData.begin(), hexData.end()),
                                                 ChainManager::getActivePermission(EOS_SYSTEM_ACCOUNT), getInfoData);
-    QJsonObject txnObj = signedTxn.toJson().toObject();
 
     QJsonArray avaibleKeys;
-    std::string pub = eos_key::get_eos_public_key_by_wif(super_private_key.toStdString());
+    auto pub = eos_key::get_eos_public_key_by_wif(super_private_key.toStdString());
     avaibleKeys.append(QJsonValue(QString::fromStdString(pub)));
 
     QJsonObject obj;
     obj.insert("available_keys", avaibleKeys);
-    obj.insert("transaction", txnObj);
+    obj.insert("transaction", signedTxn.toJson().toObject());
     return QJsonDocument(obj).toJson();
 }
 
@@ -161,15 +159,15 @@ QByteArray CreateAccount::packPushTransactionParam()
         return QByteArray();
     }
 
-    QJsonArray array = QJsonDocument::fromJson(getRequiredKeysData).object().value("required_keys").toArray();
+    auto array = QJsonDocument::fromJson(getRequiredKeysData).object().value("required_keys").toArray();
     if (!array.size()) {
         return QByteArray();
     }
 
-    bool match = false;
-    std::string pub = eos_key::get_eos_public_key_by_wif(super_private_key.toStdString());
-    for (int i = 0; i < array.size(); ++i) {
-        std::string key = array.at(i).toString().toStdString();
+    bool match  = false;
+    auto pub    = eos_key::get_eos_public_key_by_wif(super_private_key.toStdString());
+    for (auto i = 0; i < array.size(); ++i) {
+        auto key = array.at(i).toString().toStdString();
         if (key.compare(pub) == 0) {
             match = true;
             break;
@@ -180,22 +178,18 @@ QByteArray CreateAccount::packPushTransactionParam()
         return QByteArray();
     }
 
-    std::vector<unsigned char> pri = eos_key::get_private_key_by_wif(super_private_key.toStdString());
+    auto pri = eos_key::get_private_key_by_wif(super_private_key.toStdString());
     if (pri.empty()) {
         return QByteArray();
     }
 
-    QJsonObject info = QJsonDocument::fromJson(getInfoData).object();
+    auto info = QJsonDocument::fromJson(getInfoData).object();
     if (info.isEmpty()) {
         return QByteArray();
     }
 
     signedTxn.sign(pri, TypeChainId::fromHex(info.value("chain_id").toString().toStdString()));
-    PackedTransaction packedTxn(signedTxn, "none");
-
-    QJsonObject obj = packedTxn.toJson().toObject();
-
-    return QJsonDocument(obj).toJson();
+    return QJsonDocument(PackedTransaction(signedTxn, "none").toJson().toObject()).toJson();
 }
 
 QString CreateAccount::createNewName()

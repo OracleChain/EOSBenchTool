@@ -134,9 +134,9 @@ void MainWindow::updateMaxTPS(double tps)
 void MainWindow::enablePacker(bool enable)
 {
     if (enable) {
-        QVector<std::string> accounts = AccountManager::instance().listAccounts();
+        auto accounts = AccountManager::instance().listAccounts();
         for (int i = 0; i < accounts.size(); ++i) {
-            Packer *p = new Packer;
+            auto p = new Packer;
             connect(p, &Packer::finished, p, &QObject::deleteLater);    // auto delete
             connect(p, &Packer::newPackedTrx, trxpool, &TransactionPool::incomingPackedTrxs);
 
@@ -212,13 +212,13 @@ void MainWindow::on_pushButtonInitialize_clicked()
 
     commonOutput(QString("Create account done.\nNow start to transfer %1 %2 from %3 to accounts just created.").arg(total_tokens).arg(token_name).arg(super_account));
 
-    QVector<std::string> accounts = AccountManager::instance().listAccounts();
+    auto accounts = AccountManager::instance().listAccounts();
     int accountSize = accounts.size();
     int balance = total_tokens / accountSize;
     for (int i = 0; i < accountSize; ++i) {
         PushManager push;
-        QString quantity = QString("%1.0000 %2").arg(balance).arg(token_name);
-        QString to = QString::fromStdString(accounts.at(i));
+        auto quantity = QString("%1.0000 %2").arg(balance).arg(token_name);
+        auto to       = QString::fromStdString(accounts.at(i));
         commonOutput(QString("Transfering %1 to %2 ...").arg(quantity).arg(to));
         bool ret = push.transferToken(super_account, to, quantity);
         commonOutput(ret ? "Succeed." : "Failed.");

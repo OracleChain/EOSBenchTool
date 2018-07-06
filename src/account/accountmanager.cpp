@@ -25,7 +25,7 @@ void AccountManager::addAccounts(const QString &name, const QPair<std::string, s
 
 void AccountManager::removeAll()
 {
-    QPair<std::string, std::string> superKey = accounts[super_account];
+    auto superKey = accounts[super_account];
     accounts.clear();
     accounts.insert(super_account, superKey);
 }
@@ -43,9 +43,9 @@ QPair<std::string, std::string> AccountManager::listKeys(const QString &account)
 QVector<std::string> AccountManager::listAccounts()
 {
     QVector<std::string> result;
-    QStringList keys = accounts.keys();
+    auto keys = accounts.keys();
     for (int i = 0; i < keys.size(); ++i) {
-        QString name = keys.at(i);
+        auto name = keys.at(i);
         if (name.compare(QString::fromStdString(EOS_SYSTEM_ACCOUNT)) == 0
                 || name.compare(super_account) == 0) {
             continue;

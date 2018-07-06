@@ -57,21 +57,21 @@ void ResultCounter::get_block_returned(const QByteArray &data)
 {
     curTrxs = 0;
 
-    QJsonObject obj = QJsonDocument::fromJson(data).object();
+    auto obj = QJsonDocument::fromJson(data).object();
     do
     {
         if (obj.isEmpty()) {
             break;
         }
 
-        QString ts = obj.value("timestamp").toString();
+        auto ts = obj.value("timestamp").toString();
         if (ts.isEmpty()) {
             break;
         }
 
         curTimestamp = QDateTime::fromString(ts, Qt::ISODateWithMs).toMSecsSinceEpoch();
 
-        QJsonArray txnArray = obj.value("transactions").toArray();
+        auto txnArray = obj.value("transactions").toArray();
         curTrxs = txnArray.size();
     } while(false);
 

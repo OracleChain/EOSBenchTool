@@ -29,14 +29,14 @@ void TransactionPool::run()
 
      HttpClient httpc;
      int sz = packedTransactions.size();
-    for (int i = 0; i < sz && !needStop; i += batch_size) {
+    for (auto i = 0; i < sz && !needStop; i += batch_size) {
         QEventLoop loop;
         connect(&httpc, &HttpClient::responseData, &loop, &QEventLoop::quit);
 
         QJsonArray array;
         int range = sz - i > batch_size ? batch_size : sz - i;
         for (int j = 0; j < range; ++j) {
-            QJsonObject val = QJsonDocument::fromJson(packedTransactions.at(i+j)).object();
+            auto val = QJsonDocument::fromJson(packedTransactions.at(i+j)).object();
             array.append(val);
         }
 
@@ -71,7 +71,7 @@ int TransactionPool::get_block_info()
 
     QEventLoop loop;
     connect(&httpc, &HttpClient::responseData, [&](const QByteArray& data){
-        QJsonObject obj = QJsonDocument::fromJson(data).object();
+        auto obj = QJsonDocument::fromJson(data).object();
         if (!obj.isEmpty()) {
             num = obj.value("head_block_num").toInt();
         }
