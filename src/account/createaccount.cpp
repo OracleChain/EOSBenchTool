@@ -53,8 +53,8 @@ int CreateAccount::create(int threadNum, const create_account_callback& func)
         connect(this, &CreateAccount::oneRoundFinished, &loop, &QEventLoop::quit);
 
         if (httpc) {
-            httpc->request(FunctionID::get_info);
             connect(httpc, &HttpClient::responseData, this, &CreateAccount::get_info_returned);
+            httpc->request(FunctionID::get_info);
         }
 
         loop.exec();
@@ -81,8 +81,8 @@ void CreateAccount::get_info_returned(const QByteArray &data)
     }
 
     if (httpc) {
-        httpc->request(FunctionID::get_required_keys, param);
         connect(httpc, &HttpClient::responseData, this, &CreateAccount::get_required_keys_returned);
+        httpc->request(FunctionID::get_required_keys, param);
     }
 }
 
@@ -100,8 +100,8 @@ void CreateAccount::get_required_keys_returned(const QByteArray &data)
     }
 
     if (httpc) {
-        httpc->request(FunctionID::push_transaction, param);
         connect(httpc, &HttpClient::responseData, this, &CreateAccount::push_transaction_returned);
+        httpc->request(FunctionID::push_transaction, param);
     }
 }
 
