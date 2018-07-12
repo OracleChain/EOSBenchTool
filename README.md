@@ -38,6 +38,11 @@ EOSBenchTool client prepares a batch of transactions to save the client's packag
 
 &emsp;4. select Build from QT menu and Run it.
 
+
+> For ubuntu, if build with errors like `connot find -lGL`, this means the openGL development library is missing.
+Just using this command to install:
+`sudo apt-get install build-essential libgl1-mesa-dev`
+
 **DOWNLOAD & TRY**
 
 |Version|MD5|
