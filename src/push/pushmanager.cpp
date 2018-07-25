@@ -13,14 +13,15 @@
 
 extern QString contract_account;
 
-PushManager::PushManager(bool flag) : httpc(new HttpClient), result(false)
+PushManager::PushManager(bool flag) : result(false)
 {
     sendTrx = flag;
+    initHttpClients();
 }
 
 PushManager::~PushManager()
 {
-    delete httpc;
+    httpcs.clear();
 }
 
 bool PushManager::transferToken(const QString &fromAccount, const QString &toAccount, const QString &quantity)
@@ -44,6 +45,14 @@ QString PushManager::getLastTransactionId()
     return transactionId;
 }
 
+void PushManager::initHttpClients()
+{
+    httpcs[FunctionID::get_info]            = std::make_shared<HttpClient>(nullptr);
+    httpcs[FunctionID::abi_json_to_bin]     = std::make_shared<HttpClient>(nullptr);
+    httpcs[FunctionID::get_required_keys]   = std::make_shared<HttpClient>(nullptr);
+    httpcs[FunctionID::push_transaction]    = std::make_shared<HttpClient>(nullptr);
+}
+
 bool PushManager::make_push(const QString &code, const QString &action, const QByteArray &input)
 {
     if (code.isEmpty() || action.isEmpty() || input.isEmpty()) {
@@ -61,10 +70,8 @@ bool PushManager::make_push(const QString &code, const QString &action, const QB
     QEventLoop loop;
     connect(this, &PushManager::oneRoundFinished, &loop, &QEventLoop::quit);
 
-    if (httpc) {
-        connect(httpc, &HttpClient::responseData, this, &PushManager::abi_json_to_bin_returned);
-        httpc->request(FunctionID::abi_json_to_bin, QJsonDocument(obj).toJson());
-    }
+    connect(httpcs[FunctionID::abi_json_to_bin].get(), &HttpClient::responseData, this, &PushManager::abi_json_to_bin_returned);
+    httpcs[FunctionID::abi_json_to_bin]->request(FunctionID::abi_json_to_bin, QJsonDocument(obj).toJson());
 
     loop.exec();
 
@@ -128,7 +135,7 @@ QByteArray PushManager::packPushTransactionParam()
 
 void PushManager::abi_json_to_bin_returned(const QByteArray &data)
 {
-    disconnect(httpc, &HttpClient::responseData, this, &PushManager::abi_json_to_bin_returned);
+    disconnect(httpcs[FunctionID::abi_json_to_bin].get(), &HttpClient::responseData, this, &PushManager::abi_json_to_bin_returned);
 
     if (data.isEmpty()) {
         emit oneRoundFinished();
@@ -138,15 +145,13 @@ void PushManager::abi_json_to_bin_returned(const QByteArray &data)
     abiJsonToBinData.clear();
     abiJsonToBinData = data;
 
-    if (httpc) {
-        connect(httpc, &HttpClient::responseData, this, &PushManager::get_info_returned);
-        httpc->request(FunctionID::get_info);
-    }
+    connect(httpcs[FunctionID::get_info].get(), &HttpClient::responseData, this, &PushManager::get_info_returned);
+    httpcs[FunctionID::abi_json_to_bin]->request(FunctionID::get_info);
 }
 
 void PushManager::get_info_returned(const QByteArray &data)
 {
-    disconnect(httpc, &HttpClient::responseData, this, &PushManager::get_info_returned);
+    disconnect(httpcs[FunctionID::get_info].get(), &HttpClient::responseData, this, &PushManager::get_info_returned);
 
     if (data.isEmpty()) {
         emit oneRoundFinished();
@@ -162,15 +167,13 @@ void PushManager::get_info_returned(const QByteArray &data)
         return;
     }
 
-    if (httpc) {
-        connect(httpc, &HttpClient::responseData, this, &PushManager::get_required_keys_returned);
-        httpc->request(FunctionID::get_required_keys, param);
-    }
+    connect(httpcs[FunctionID::get_required_keys].get(), &HttpClient::responseData, this, &PushManager::get_required_keys_returned);
+    httpcs[FunctionID::abi_json_to_bin]->request(FunctionID::get_required_keys, param);
 }
 
 void PushManager::get_required_keys_returned(const QByteArray &data)
 {
-    disconnect(httpc, &HttpClient::responseData, this, &PushManager::get_required_keys_returned);
+    disconnect(httpcs[FunctionID::get_required_keys].get(), &HttpClient::responseData, this, &PushManager::get_required_keys_returned);
 
     if (data.isEmpty()) {
         emit oneRoundFinished();
@@ -188,15 +191,13 @@ void PushManager::get_required_keys_returned(const QByteArray &data)
         return;
     }
 
-    if (httpc) {
-        connect(httpc, &HttpClient::responseData, this, &PushManager::push_transaction_returned);
-        httpc->request(FunctionID::push_transaction, param);
-    }
+    connect(httpcs[FunctionID::push_transaction].get(), &HttpClient::responseData, this, &PushManager::push_transaction_returned);
+    httpcs[FunctionID::abi_json_to_bin]->request(FunctionID::push_transaction, param);
 }
 
 void PushManager::push_transaction_returned(const QByteArray &data)
 {
-    disconnect(httpc, &HttpClient::responseData, this, &PushManager::push_transaction_returned);
+    disconnect(httpcs[FunctionID::push_transaction].get(), &HttpClient::responseData, this, &PushManager::push_transaction_returned);
 
     auto obj = QJsonDocument::fromJson(data).object();
     if (!obj.isEmpty()) {

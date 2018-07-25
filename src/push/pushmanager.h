@@ -3,10 +3,11 @@
 
 #include <QObject>
 #include <QString>
+#include <QMap>
+#include <memory>
 
 #include "codebase/chain/signedtransaction.h"
-
-class HttpClient;
+#include "codebase/utility/httpclient.h"
 
 class PushManager : public QObject
 {
@@ -20,6 +21,7 @@ public:
     QString getLastTransactionId();
 
 private:
+    void initHttpClients();
     bool make_push(const QString& code, const QString& action, const QByteArray& input);
 
     QByteArray packGetRequiredKeysParam();
@@ -36,7 +38,7 @@ signals:
     void trxPacked(const QByteArray& data);
 
 private:
-    HttpClient *httpc;
+    QMap<FunctionID, std::shared_ptr<HttpClient>> httpcs;
 
     bool result;
     bool sendTrx;

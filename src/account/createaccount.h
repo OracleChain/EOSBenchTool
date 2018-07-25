@@ -4,10 +4,12 @@
 #include <QObject>
 #include <QVector>
 #include <functional>
+#include <QMap>
+#include <memory>
 
 #include "codebase/chain/signedtransaction.h"
+#include "codebase/utility/httpclient.h"
 
-class HttpClient;
 class eos_key;
 
 using create_account_callback = std::function<void(const QString&, bool)>;
@@ -31,20 +33,20 @@ private slots:
     void push_transaction_returned(const QByteArray& data);
 
 private:
+    void initHttpClients();
     QByteArray packGetRequiredKeysParam();
     QByteArray packPushTransactionParam();
 
     QString createNewName();
 
 private:
-    QVector<eos_key> keys;
-    HttpClient *httpc;
+    QVector<eos_key>                                keys;
+    QMap<FunctionID, std::shared_ptr<HttpClient>>   httpcs;
 
     QByteArray getInfoData;
     QByteArray getRequiredKeysData;
 
     SignedTransaction signedTxn;
-
     QString newAccountName;
 };
 

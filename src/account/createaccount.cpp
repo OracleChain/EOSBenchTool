@@ -21,14 +21,14 @@
 
 extern QString super_private_key;
 
-CreateAccount::CreateAccount() :
-    httpc(new HttpClient)
+CreateAccount::CreateAccount()
 {
+    initHttpClients();
 }
 
 CreateAccount::~CreateAccount()
 {
-    delete httpc;
+    httpcs.clear();
 }
 
 int CreateAccount::create(int threadNum, const create_account_callback& func)
@@ -52,10 +52,8 @@ int CreateAccount::create(int threadNum, const create_account_callback& func)
         QEventLoop loop;
         connect(this, &CreateAccount::oneRoundFinished, &loop, &QEventLoop::quit);
 
-        if (httpc) {
-            connect(httpc, &HttpClient::responseData, this, &CreateAccount::get_info_returned);
-            httpc->request(FunctionID::get_info);
-        }
+        connect(httpcs[FunctionID::get_info].get(), &HttpClient::responseData, this, &CreateAccount::get_info_returned);
+        httpcs[FunctionID::get_info]->request(FunctionID::get_info);
 
         loop.exec();
 
@@ -69,7 +67,7 @@ int CreateAccount::create(int threadNum, const create_account_callback& func)
 
 void CreateAccount::get_info_returned(const QByteArray &data)
 {
-    disconnect(httpc, &HttpClient::responseData, this, &CreateAccount::get_info_returned);
+    disconnect(httpcs[FunctionID::get_info].get(), &HttpClient::responseData, this, &CreateAccount::get_info_returned);
 
     getInfoData.clear();
     getInfoData = data;
@@ -80,15 +78,13 @@ void CreateAccount::get_info_returned(const QByteArray &data)
         return;
     }
 
-    if (httpc) {
-        connect(httpc, &HttpClient::responseData, this, &CreateAccount::get_required_keys_returned);
-        httpc->request(FunctionID::get_required_keys, param);
-    }
+    connect(httpcs[FunctionID::get_required_keys].get(), &HttpClient::responseData, this, &CreateAccount::get_required_keys_returned);
+    httpcs[FunctionID::get_required_keys]->request(FunctionID::get_required_keys, param);
 }
 
 void CreateAccount::get_required_keys_returned(const QByteArray &data)
 {
-    disconnect(httpc, &HttpClient::responseData, this, &CreateAccount::get_required_keys_returned);
+    disconnect(httpcs[FunctionID::get_required_keys].get(), &HttpClient::responseData, this, &CreateAccount::get_required_keys_returned);
 
     getRequiredKeysData.clear();
     getRequiredKeysData = data;
@@ -99,15 +95,13 @@ void CreateAccount::get_required_keys_returned(const QByteArray &data)
         return;
     }
 
-    if (httpc) {
-        connect(httpc, &HttpClient::responseData, this, &CreateAccount::push_transaction_returned);
-        httpc->request(FunctionID::push_transaction, param);
-    }
+    connect(httpcs[FunctionID::push_transaction].get(), &HttpClient::responseData, this, &CreateAccount::push_transaction_returned);
+    httpcs[FunctionID::push_transaction]->request(FunctionID::push_transaction, param);
 }
 
 void CreateAccount::push_transaction_returned(const QByteArray &data)
 {
-    disconnect(httpc, &HttpClient::responseData, this, &CreateAccount::push_transaction_returned);
+    disconnect(httpcs[FunctionID::push_transaction].get(), &HttpClient::responseData, this, &CreateAccount::push_transaction_returned);
 
     do
     {
@@ -127,6 +121,13 @@ void CreateAccount::push_transaction_returned(const QByteArray &data)
     } while(false);
 
     emit oneRoundFinished();
+}
+
+void CreateAccount::initHttpClients()
+{
+    httpcs[FunctionID::get_info]            = std::make_shared<HttpClient>(nullptr);
+    httpcs[FunctionID::get_required_keys]   = std::make_shared<HttpClient>(nullptr);
+    httpcs[FunctionID::push_transaction]    = std::make_shared<HttpClient>(nullptr);
 }
 
 QByteArray CreateAccount::packGetRequiredKeysParam()
