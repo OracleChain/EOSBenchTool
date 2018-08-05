@@ -19,7 +19,7 @@
 
 The EOSBenchTool is a EOS pressure testing tool. 
 
-EOSBenchTool client prepares a batch of transactions to save the client's packaging, signature time, then use push_transactions to sends transactions to EOS node, use the limited clients to maximize the pressure test on the server!
+EOSBenchTool prepares a batch of transactions to save the client's packaging, signature time, then use `push_transactions` to sends transactions to EOS node, using limited clients to maximize the pressure test on the server!
 
 
 ------------------------------
