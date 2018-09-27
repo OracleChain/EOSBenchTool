@@ -7,6 +7,8 @@
 #include "misc/customtabstyle.h"
 #include "misc/aboutframe.h"
 
+#include <QTabBar>
+
 QString base_url;
 QString url_port;
 QString super_account = "eosio";
@@ -21,9 +23,9 @@ int batch_size = 300;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
+    about(nullptr),
     resultCounter(nullptr),
     trxpool(nullptr),
-    about(nullptr),
     total_trxs(0)
 {
     ui->setupUi(this);
